@@ -1,4 +1,5 @@
 #import "SEGAppsFlyerIntegrationFactory.h"
+#import "SEGMoEngageIntegrationFactory.h"
 #import "FlutterSegmentPlugin.h"
 #import <Segment/SEGAnalytics.h>
 #import <Segment/SEGContext.h>
@@ -350,6 +351,8 @@ static BOOL wasSetupFromFile = NO;
     NSString *writeKey = [dict objectForKey: @"com.claimsforce.segment.WRITE_KEY"];
     BOOL trackApplicationLifecycleEvents = [[dict objectForKey: @"com.claimsforce.segment.TRACK_APPLICATION_LIFECYCLE_EVENTS"] boolValue];
     BOOL isAmplitudeIntegrationEnabled = [[dict objectForKey: @"com.claimsforce.segment.ENABLE_AMPLITUDE_INTEGRATION"] boolValue];
+    BOOL isMoEngageIntegrationEnabled = [[dict objectForKey: @"com.claimsforce.segment.ENABLE_MOENGAGE_INTEGRATION"] boolValue];
+
     if(!writeKey) {
         return nil;
     }
@@ -360,6 +363,10 @@ static BOOL wasSetupFromFile = NO;
       [configuration use:[SEGAmplitudeIntegrationFactory instance]];
     }
 
+    if (isMoEngageIntegrationEnabled) {
+      [configuration use:[SEGMoEngageIntegrationFactory instance]];
+    }
+
     return configuration;
 }
 
@@ -368,6 +375,8 @@ static BOOL wasSetupFromFile = NO;
     BOOL trackApplicationLifecycleEvents = [[dict objectForKey: @"trackApplicationLifecycleEvents"] boolValue];
     BOOL isAmplitudeIntegrationEnabled = [[dict objectForKey: @"amplitudeIntegrationEnabled"] boolValue];
     BOOL isAppsflyerIntegrationEnabled = [[dict objectForKey: @"appsflyerIntegrationEnabled"] boolValue];
+    BOOL isMoEngageIntegrationEnabled = [[dict objectForKey: @"moEngageIntegrationEnabled"] boolValue];
+
     SEGAnalyticsConfiguration *configuration = [SEGAnalyticsConfiguration configurationWithWriteKey:writeKey];
     configuration.trackApplicationLifecycleEvents = trackApplicationLifecycleEvents;
 
@@ -377,6 +386,10 @@ static BOOL wasSetupFromFile = NO;
 
     if (isAppsflyerIntegrationEnabled) {
       [configuration use:[SEGAppsFlyerIntegrationFactory instance]];
+    }
+
+    if (isMoEngageIntegrationEnabled) {
+      [configuration use:[SEGMoEngageIntegrationFactory instance]];
     }
 
     return configuration;
