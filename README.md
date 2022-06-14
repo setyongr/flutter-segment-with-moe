@@ -235,6 +235,38 @@ SegmentDefaultOptions.instance.options = {
 }
 ```
 
+## Integration
+
+### MoEngage
+
+To add MoEngage integration to your app. Add this piece of code to your iOS App Delegate.
+
+```swift
+import Segment_MoEngage
+...
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey:  Any]?) -> Bool {
+...
+    let sdkConfig = MOSDKConfig(appID: "YOUR APP ID")
+    SEGMoEngageInitializer.initializeDefaultInstance(sdkConfig)
+...
+}
+```
+
+Then enable it when initializing flutter_segment
+
+```dart
+Segment.config(
+    options: SegmentConfig(
+      writeKey: 'YOUR_WRITE_KEY_GOES_HERE',
+      trackApplicationLifecycleEvents: false,
+      moEngageIntegrationEnabled: true,
+      debug: false,
+    ),
+);
+```
+
+No extra step needed for Android.
+
 ## Issues
 Please file any issues, bugs, or feature requests in the [GitHub repo](https://github.com/claimsforce-gmbh/flutter-segment/issues/new).
 
