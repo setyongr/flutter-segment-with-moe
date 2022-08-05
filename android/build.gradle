@@ -37,7 +37,7 @@ android {
         implementation 'com.segment.analytics.android:analytics:4.10.4'
         implementation 'com.segment.analytics.android.integrations:amplitude:3.1.0'
         implementation 'com.appsflyer:segment-android-integration:6.5.2'
-        implementation("com.moengage:moengage-segment-integration:5.6.00") {
+        implementation("com.moengage:moengage-segment-integration:6.2.3") {
             transitive = true
         }
         implementation("androidx.core:core:1.6.0")
